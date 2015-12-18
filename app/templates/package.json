@@ -1,0 +1,21 @@
+{
+  "name"        : "<%= appname %>",
+  "description" : "...",
+  "version"     : "0.0.1",
+  "author"      : {
+    "name"  : "Your name",
+    "email" : "your@email.com",
+    "url"   : "https://your.github.io"
+  },
+  "license"     : "MIT",
+  "repository"  : {
+    "type" : "git",
+    "url"  : "git://github.com/yourid/<%= appname %>.git"
+  },
+  "main"        : "dist/index.js",
+  "typings"     : "dist/index.d.ts",
+  "scripts"     : {
+    "build" : "tsc -p src",
+    "run"   : "node dist/index.js"
+  }
+}
