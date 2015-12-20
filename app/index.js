@@ -1,21 +1,68 @@
 'use strict';
 
-var chalk = require('chalk');
-var path = require('path');
-var yo = require('yeoman-generator');
+let chalk = require('chalk');
+let path = require('path');
+let yo = require('yeoman-generator');
+
+let moduleList = [
+	{
+		name: 'node',
+		tsd: 'node'
+	},
+	{
+		name: 'rxjs',
+		npm: 'rxjs',
+		optional: {
+			name: 'RxJs',
+			checked: true
+		}
+	},
+	{
+		name: 'lodash',
+		npm: 'lodash',
+		tsd: 'lodash',
+		optional: {
+			name: 'Lodash',
+			checked: true
+		}
+	}
+];
 
 module.exports = yo.Base.extend({
 	constructor: function () {
 		yo.Base.apply(this, arguments);
 	},
 
-	//initializing: function () {
-	//	console.log('index.js..initializing()');
-	//},
+	//initializing: function () {},
 
 	prompting: function () {
-		var done = this.async();
-		var prompts = [
+		let done = this.async();
+
+		let moduleNames = {};
+		let f = -1;
+		let fmax = moduleList.length;
+
+		while (++f < fmax) {
+			let module = moduleList[f];
+			moduleNames[module.name] = f;
+		}
+
+		let modules = [];
+		let choices = [];
+
+		moduleList.forEach(module => {
+			if (!module.optional) {
+				modules.push(module);
+			} else {
+				choices.push({
+					name: module.optional.name,
+					value: module.name,
+					checked: module.optional.checked
+				});
+			}
+		});
+
+		let prompts = [
 			{
 				type: 'text',
 				name: 'appname',
@@ -24,26 +71,21 @@ module.exports = yo.Base.extend({
 			},
 			{
 				type: 'checkbox',
-				name: 'includeModules',
-				message: 'Choose include modules.',
-				choices: [
-					{
-						name: 'RxJs',
-						value: 'rxjs',
-						checked: true
-					},
-					{
-						name: 'Lodash',
-						value: 'lodash',
-						checked: true
-					}
-				]
+				name: 'choosed',
+				message: 'Choose additional modules.',
+				choices: choices
 			}
 		];
 
 		this.prompt(prompts, (answers) => {
 			this.appname = answers.appname;
-			this.includeModules = answers.includeModules;
+
+			if (answers && answers.choosed && answers.choosed.length > 0) {
+				modules = modules.concat(answers.choosed.map(name => moduleList[moduleNames[name]]));
+			}
+
+			this.modules = modules;
+
 			done();
 		});
 	},
@@ -58,15 +100,16 @@ module.exports = yo.Base.extend({
 	},
 
 	install: function () {
-		if (this.includeModules && this.includeModules.length > 0) {
-			var tsdFilter = pkg => ['lodash'].indexOf(pkg) > -1;
+		let npm = [];
+		let tsd = [];
 
-			var npm = this.includeModules;
-			var tsd = this.includeModules.filter(tsdFilter);
+		this.modules.forEach(module => {
+			if (module.npm != undefined) npm.push(module.npm);
+			if (module.tsd != undefined) tsd.push(module.tsd);
+		});
 
-			this.npmInstall(npm, {save: true});
-			this.spawnCommand('tsd', ['install', 'node'].concat(tsd, ['--resolve', '--save']));
-		}
+		this.npmInstall(npm, {'save': true});
+		this.spawnCommand('tsd', ['install'].concat(tsd, ['--resolve', '--save']));
 	}
 
 	//end: function () {
