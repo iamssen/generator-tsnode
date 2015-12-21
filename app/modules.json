@@ -1,0 +1,23 @@
+[
+  {
+    "name" : "node",
+    "tsd"  : "node"
+  },
+  {
+    "name"     : "rxjs",
+    "npm"      : "rxjs",
+    "optional" : {
+      "name"    : "RxJs",
+      "checked" : true
+    }
+  },
+  {
+    "name"     : "lodash",
+    "npm"      : "lodash",
+    "tsd"      : "lodash",
+    "optional" : {
+      "name"    : "Lodash",
+      "checked" : true
+    }
+  }
+]

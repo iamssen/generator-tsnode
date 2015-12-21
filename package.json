@@ -1,7 +1,7 @@
 {
   "name"         : "generator-tsnode",
   "description"  : "Yeoman generator for Typescript + Node.js",
-  "version"      : "2015.12.18",
+  "version"      : "2015.12.21",
   "author"       : {
     "name"  : "SSen",
     "email" : "i@ssen.name",
@@ -28,6 +28,7 @@
     "chalk"            : "latest",
     "npm-check"        : "latest",
     "yeoman-generator" : "latest",
-    "yosay"            : "latest"
+    "yosay"            : "latest",
+    "ejs"              : "latest"
   }
 }

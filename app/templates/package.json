@@ -15,7 +15,13 @@
   "main"        : "dist/index.js",
   "typings"     : "dist/index.d.ts",
   "scripts"     : {
-    "build" : "tsc -p src",
+    "build" : "gulp build",
     "run"   : "node dist/index.js"
+  },
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-clean": "*",
+    "gulp-sass": "*",
+    "gulp-tsc": "*"
   }
 }

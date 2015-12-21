@@ -3,30 +3,8 @@
 let chalk = require('chalk');
 let path = require('path');
 let yo = require('yeoman-generator');
-
-let moduleList = [
-	{
-		name: 'node',
-		tsd: 'node'
-	},
-	{
-		name: 'rxjs',
-		npm: 'rxjs',
-		optional: {
-			name: 'RxJs',
-			checked: true
-		}
-	},
-	{
-		name: 'lodash',
-		npm: 'lodash',
-		tsd: 'lodash',
-		optional: {
-			name: 'Lodash',
-			checked: true
-		}
-	}
-];
+let ejs = require('ejs');
+let moduleList = require('./modules.json');
 
 module.exports = yo.Base.extend({
 	constructor: function () {
@@ -94,21 +72,34 @@ module.exports = yo.Base.extend({
 		app: function () {
 			this.directory('src', 'src', null);
 			this.copy('_gitignore', '.gitignore');
-			this.copy('package.json', 'package.json');
+			this.copy('gulpfile.js', 'gulpfile.js');
+			//this.copy('package.json', 'package.json');
 			this.copy('tsd.json', 'tsd.json');
+		},
+		packageJson: function () {
+			let source = this.read('package.json');
+			let data = JSON.parse(ejs.render(source, this));
+			let npm = {};
+
+			this.modules.forEach(module => {
+				if (module.npm) npm[module.npm] = '*';
+			});
+
+			data.dependencies = npm;
+			this.fs.writeJSON('package.json', data);
 		}
 	},
 
 	install: function () {
-		let npm = [];
+		//let npm = [];
 		let tsd = [];
 
 		this.modules.forEach(module => {
-			if (module.npm != undefined) npm.push(module.npm);
+			//if (module.npm != undefined) npm.push(module.npm);
 			if (module.tsd != undefined) tsd.push(module.tsd);
 		});
 
-		this.npmInstall(npm, {'save': true});
+		this.npmInstall();
 		this.spawnCommand('tsd', ['install'].concat(tsd, ['--resolve', '--save']));
 	}
 
