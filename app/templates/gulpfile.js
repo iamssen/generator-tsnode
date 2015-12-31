@@ -19,7 +19,7 @@ gulp.task('typescript', () => {
 	return gulp.src(['./src/**/*.ts', '!./src/typings/**'])
 		.pipe(typescript({
 			module: "commonjs",
-			target: "es6",
+			target: "es5",
 			sourceMap: true,
 			removeComments: true,
 			noImplicitAny: false,
