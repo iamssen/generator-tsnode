@@ -1,34 +1,34 @@
 {
-  "name"         : "generator-tsnode",
-  "description"  : "Yeoman generator for Typescript + Node.js",
-  "version"      : "2015.12.31",
-  "author"       : {
-    "name"  : "SSen",
+  "name" : "generator-tsnode",
+  "description" : "Yeoman generator for Typescript + Node.js",
+  "version" : "2016.1.25",
+  "author" : {
+    "name" : "SSen",
     "email" : "i@ssen.name",
-    "url"   : "https://iamssen.github.io"
+    "url" : "https://iamssen.github.io"
   },
-  "license"      : "MIT",
-  "repository"   : {
+  "license" : "MIT",
+  "repository" : {
     "type" : "git",
-    "url"  : "git://github.com/iamssen/generator-tsnode.git"
+    "url" : "git://github.com/iamssen/generator-tsnode.git"
   },
-  "engines"      : {
+  "engines" : {
     "node" : ">=4.0.0"
   },
-  "main"         : "app/index.js",
-  "files"        : [
+  "main" : "app/index.js",
+  "files" : [
     "app"
   ],
-  "keywords"     : [
+  "keywords" : [
     "yeoman-generator",
     "nodejs",
     "typescript"
   ],
   "dependencies" : {
-    "chalk"            : "latest",
-    "npm-check"        : "latest",
+    "chalk" : "latest",
+    "npm-check" : "latest",
     "yeoman-generator" : "latest",
-    "yosay"            : "latest",
-    "ejs"              : "latest"
+    "yosay" : "latest",
+    "ejs" : "latest"
   }
 }

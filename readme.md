@@ -9,6 +9,9 @@ yo tsnode
 
 # Update log
 
+## 2016.1.25
+- Change module dialog
+
 ## 2015.12.31
 - Remove `use strict`
 - Change typescript target from `es6` to `es5`

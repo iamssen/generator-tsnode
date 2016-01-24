@@ -1,23 +1,23 @@
 [
   {
     "name" : "node",
-    "tsd"  : "node"
+    "tsd" : "node"
   },
   {
-    "name"     : "rxjs",
-    "npm"      : "rxjs",
+    "name" : "rxjs",
+    "npm" : "rxjs",
     "optional" : {
-      "name"    : "RxJs",
+      "name" : "RxJs",
       "checked" : true
     }
   },
   {
-    "name"     : "lodash",
-    "npm"      : "lodash",
-    "tsd"      : "lodash",
+    "name" : "lodash",
+    "npm" : "lodash",
+    "tsd" : "lodash",
     "optional" : {
-      "name"    : "Lodash",
-      "checked" : true
+      "name" : "Lodash",
+      "checked" : false
     }
   }
 ]
